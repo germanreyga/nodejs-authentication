@@ -45,7 +45,7 @@ passport.deserializeUser((id, done) => {
   console.log("Deserializo!");
   UserModel.findByEmail(id)
     .then(user => {
-      done(null, user);
+      done(null, user[0]);
     })
     .catch(err => done(err));
 });
