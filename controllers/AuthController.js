@@ -35,5 +35,5 @@ exports.registerUser = (req, res) => {
     .then(data => {
       res.render("auth/login", { layout: "auth", errors: req.flash("errors") });
     })
-    .catch(error => console.log(error));
+    .catch(error => error);
 };

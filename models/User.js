@@ -13,3 +13,8 @@ exports.findByEmail = email => {
   const result = knex.from("users").where({ email: email });
   return result;
 };
+
+exports.findAll = () => {
+  const result = knex.from("users").timeout(1000, { cancel: true });
+  return result;
+};

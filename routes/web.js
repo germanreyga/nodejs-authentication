@@ -2,6 +2,7 @@ let router = require("express").Router();
 let homepageController = require("../controllers/HomepageController");
 let authController = require("../controllers/AuthController");
 let dashboardController = require("../controllers/DashboardController");
+let adminController = require("../controllers/AdminController");
 let authValidator = require("../validators/AuthValidator");
 let passport = require("passport");
 
@@ -15,6 +16,7 @@ router.post(
   authController.registerUser
 );
 
+router.get("/users", authValidator.adminUser, adminController.userList);
 router.get(
   "/dashboard",
   authValidator.basicUser,
@@ -23,10 +25,9 @@ router.get(
 router.post(
   "/loginUser",
   passport.authenticate("local", {
-    successRedirect: "/dashboard" /*,
-    failureRedirect: "/login"*/
+    successRedirect: "/dashboard",
+    failureRedirect: "/login"
   })
 );
-router.get("/*", homepageController.index);
 
 module.exports = router;

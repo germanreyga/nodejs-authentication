@@ -12,7 +12,7 @@ const verifyCallback = (inputEmail, inputPassword, done) => {
   UserModel.findByEmail(inputEmail)
     .then(user => {
       // Si no encuentra un usuario entonces regresa falso
-      if (!user) {
+      if (!user || user.length == 0) {
         return done(null, false);
       }
       // Si encuentra un usuario y coincide con la contraseña entonces

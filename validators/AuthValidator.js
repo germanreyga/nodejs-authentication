@@ -29,11 +29,23 @@ exports.registerUser = [
 ];
 
 exports.basicUser = [
-  // Confirms if the user has a session currently
+  // Confirms if the user has a session with basic permissions
   check().custom((value, { req, loc, path }) => {
     if (typeof req.user === "undefined") {
-      console.log("Error");
-      throw new Error("Non-registered users are not allowed");
+      throw new Error("Non-registered users are not allowed in the dashboard");
+    } else {
+      return value;
+    }
+  })
+];
+
+exports.adminUser = [
+  // Confirms if the user has a session with admin permissions
+  check().custom((value, { req, loc, path }) => {
+    if (typeof req.user === "undefined") {
+      throw new Error("Non-registered users are not allowed in the user list");
+    } else if (req.user.role != "admin") {
+      throw new Error(403);
     } else {
       return value;
     }
