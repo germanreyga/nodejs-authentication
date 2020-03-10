@@ -1,13 +1,15 @@
 let router = require("express").Router();
 let homepageController = require("../controllers/HomepageController");
 let authController = require("../controllers/AuthController");
+let dashboardController = require("../controllers/DashboardController");
 let authValidator = require("../validators/AuthValidator");
 let passport = require("passport");
 
 router.get("/", homepageController.index);
-
+router.get("/dashboard", dashboardController.index);
 router.get("/login", authController.login);
 router.get("/register", authController.register);
+router.get("/logout", authController.logout);
 router.post(
   "/registerUser",
   authValidator.registerUser,
@@ -15,6 +17,14 @@ router.post(
 );
 router.post(
   "/loginUser",
+  passport.authenticate("local", {
+    successRedirect: "/dashboard",
+    failureRedirect: "/login"
+  })
+);
+
+router.post(
+  "/dashboard",
   passport.authenticate("local", {
     successRedirect: "/",
     failureRedirect: "/login"

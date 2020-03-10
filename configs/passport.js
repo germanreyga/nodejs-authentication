@@ -36,13 +36,11 @@ passport.use(strategy);
 
 // Guarda en las variables de sesión el id del usuario loggeado
 passport.serializeUser((user, done) => {
-  console.log("Serializo!");
   done(null, user.email);
 });
 
 // Cierra la sesión del usuario
 passport.deserializeUser((id, done) => {
-  console.log("Deserializo!");
   UserModel.findByEmail(id)
     .then(user => {
       done(null, user[0]);
