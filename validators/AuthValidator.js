@@ -27,3 +27,15 @@ exports.registerUser = [
     }
   })
 ];
+
+exports.basicUser = [
+  // Confirms if the user has a session currently
+  check().custom((value, { req, loc, path }) => {
+    if (typeof req.user === "undefined") {
+      console.log("Error");
+      throw new Error("Non-registered users are not allowed");
+    } else {
+      return value;
+    }
+  })
+];
