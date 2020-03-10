@@ -1,0 +1,55 @@
+<form class="form-signin" method="POST" action="/registerUser">
+  <div class="text-center mb-4">
+    <h1 class="h3 mb-3 font-weight-normal">Register</h1>
+    <p>
+      Template source:
+      <a href="https://getbootstrap.com/docs/4.0/examples/" target="_blank">
+        https://getbootstrap.com/docs/4.0/examples/
+      </a>
+    </p>
+    <p>
+      Already have an account? <a href="/login">Login</a>
+    </p>
+  </div>
+  {{#if errors.length}}
+  <div class="alert alert-danger">
+    Oops! the following errors were found:
+    <ul>
+      {{#each errors}}
+      <li>[{{param}}]: {{msg}}</li>
+      {{/each}}
+    </ul>
+  </div>
+  {{/if}}
+  <div class="form-label-group">
+    <input type="text" id="inputName" name="inputName" class="form-control" placeholder="Name" required>
+    <label for="inputName">Name</label>
+  </div>
+
+  <div class="form-label-group">
+    <input type="email" id="inputEmail" name="inputEmail" class="form-control" placeholder="Email address" required>
+    <label for="inputEmail">Email address</label>
+  </div>
+
+  <div class="form-group">
+    <select id="inputRole" name="inputRole" class="form-control" required>
+      <option value="" selected disabled>Role</option>
+      <option value="basic">Basic</option>
+      <option value="admin">Administrator</option>
+    </select>
+  </div>
+
+  <div class="form-label-group">
+    <input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Password" required>
+    <label for="inputPassword">Password</label>
+  </div>
+
+  <div class="form-label-group">
+    <input type="password" id="inputConfirmPassword" name="inputConfirmPassword" class="form-control"
+      placeholder="Password" required>
+    <label for="inputConfirmPassword">Confirm password</label>
+  </div>
+
+  <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+  <p class="mt-5 mb-3 text-muted text-center">© {{year}}</p>
+</form>
